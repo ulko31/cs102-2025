@@ -36,6 +36,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
+
     def extended_gcd(a, b):
         if a == 0:
             return b, 0, 1
@@ -43,15 +44,16 @@ def multiplicative_inverse(e: int, phi: int) -> int:
         x = y1 - (b // a) * x1
         y = x1
         return gcd, x, y
+
     _, x, _ = extended_gcd(e, phi)
     return x % phi
 
 
 def generate_keypair(p: int, q: int) -> Tuple[Tuple[int, int], Tuple[int, int]]:
     if not (is_prime(p) and is_prime(q)):
-        raise ValueError('Both numbers must be prime.')
+        raise ValueError("Both numbers must be prime.")
     elif p == q:
-        raise ValueError('p and q cannot be equal')
+        raise ValueError("p and q cannot be equal")
 
     n = p * q
     phi = (p - 1) * (q - 1)
@@ -64,6 +66,3 @@ def generate_keypair(p: int, q: int) -> Tuple[Tuple[int, int], Tuple[int, int]]:
 
     d = multiplicative_inverse(e, phi)
     return ((e, n), (d, n))
-
-
-
