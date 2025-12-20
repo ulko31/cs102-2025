@@ -10,7 +10,7 @@ class VigenereTestCase(unittest.TestCase):
         cases = [
             ("PYTHON", "A", "PYTHON"),
             ("python", "a", "python"),
-            ("introduction to python", "lsci", "tfvzzvwkeaqv eg rgezqv"),
+            ("introduction to python", "lsci", "tfvzzvwkeaqv lq aqvpzf"),
             ("ATTACKATDAWN", "LEMON", "LXFOPVEFRNHR"),
         ]
 
@@ -26,7 +26,7 @@ class VigenereTestCase(unittest.TestCase):
         cases = [
             ("PYTHON", "A", "PYTHON"),
             ("python", "a", "python"),
-            ("tfvzzvwkeaqv eg rgezqv", "lsci", "introduction to python"),
+            ("tfvzzvwkeaqv lq aqvpzf", "lsci", "introduction to python"),
             ("LXFOPVEFRNHR", "LEMON", "ATTACKATDAWN"),
         ]
 
