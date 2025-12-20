@@ -20,7 +20,7 @@ def encrypt_vigenere(plaintext, keyword):
             result.append(shift_char(char, keyword[key_index % key_len], decrypt=False))
             key_index += 1
         else:
-            if char == ' ':
+            if char == " ":
                 key_index += 1
             else:
                 key_index = 0
@@ -36,8 +36,8 @@ def decrypt_vigenere(ciphertext, keyword):
             result.append(shift_char(char, keyword[key_index % key_len], decrypt=True))
             key_index += 1
         else:
-            if char == ' ':
-                key_index +=1
+            if char == " ":
+                key_index += 1
             else:
                 key_index = 0
             result.append(char)
