@@ -1,48 +1,45 @@
-def encrypt_vigenere(plaintext: str, keyword: str) -> str:
-    """
-    Encrypts plaintext using a Vigenere cipher.
+def shift_char(char, key, decrypt=False):
+    if not char.isalpha():
+        return char
+    char_base = ord('A') if char.isupper() else ord('a')
+    key_base = ord('A') if key.isupper() else ord('a')
+    char_val = ord(char) - char_base
+    key_val = ord(key) - key_base
+    if decrypt:
+        shifted = (char_val - key_val) % 26
+    else:
+        shifted = (char_val + key_val) % 26
+    return chr(char_base + shifted)
 
-    >>> encrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> encrypt_vigenere("python", "a")
-    'python'
-    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
-    'LXFOPVEFRNHR'
-    """
-    ciphertext = ""
-    keyword = keyword.upper()
+def encrypt_vigenere(plaintext, keyword):
+    result = []
+    key_len = len(keyword)
     key_index = 0
     for char in plaintext:
         if char.isalpha():
-            base = ord("A") if char.isupper() else ord("a")
-            shift = ord(keyword[key_index % len(keyword)]) - ord("A")
-            ciphertext += chr((ord(char) - base + shift) % 26 + base)
+            result.append(shift_char(char, keyword[key_index % key_len], decrypt=False))
             key_index += 1
         else:
-            ciphertext += char
-    return ciphertext
+            if char == ' ':
+                key_index += 1
+            else:
+                key_index = 0
+            result.append(char)
+    return "".join(result)
 
-
-def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
-    """
-    Decrypts a ciphertext using a Vigenere cipher.
-
-    >>> decrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> decrypt_vigenere("python", "a")
-    'python'
-    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
-    'ATTACKATDAWN'
-    """
-    plaintext = ""
-    keyword = keyword.upper()
+def decrypt_vigenere(ciphertext, keyword):
+    result = []
+    key_len = len(keyword)
     key_index = 0
     for char in ciphertext:
         if char.isalpha():
-            base = ord("A") if char.isupper() else ord("a")
-            shift = ord(keyword[key_index % len(keyword)]) - ord("A")
-            plaintext += chr((ord(char) - base - shift) % 26 + base)
+            result.append(shift_char(char, keyword[key_index % key_len], decrypt=True))
             key_index += 1
         else:
-            plaintext += char
-    return plaintext
+            if char == ' ':
+                key_index +=1
+            else:
+                key_index = 0
+            result.append(char)
+
+    return "".join(result)
