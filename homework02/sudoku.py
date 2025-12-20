@@ -1,12 +1,12 @@
 import pathlib
-import typing as tp
 import random
+import typing as tp
 
 T = tp.TypeVar("T")
 
 
 def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
-    return [values[i:i + n] for i in range(0, len(values), n)]
+    return [values[i : i + n] for i in range(0, len(values), n)]
 
 
 def create_grid(puzzle: str) -> tp.List[tp.List[str]]:
@@ -25,13 +25,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
     width = 2
     line = "+".join(["-" * (width * 3)] * 3)
     for row in range(9):
-        print(
-            "".join(
-                grid[row][col].center(width)
-                + ("|" if col in (2, 5) else "")
-                for col in range(9)
-            )
-        )
+        print("".join(grid[row][col].center(width) + ("|" if col in (2, 5) else "") for col in range(9)))
         if row in (2, 5):
             print(line)
     print()
@@ -52,16 +46,10 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     start_row = (row // 3) * 3
     start_col = (col // 3) * 3
 
-    return [
-        grid[r][c]
-        for r in range(start_row, start_row + 3)
-        for c in range(start_col, start_col + 3)
-    ]
+    return [grid[r][c] for r in range(start_row, start_row + 3) for c in range(start_col, start_col + 3)]
 
 
-def find_empty_positions(
-    grid: tp.List[tp.List[str]]
-) -> tp.Optional[tp.Tuple[int, int]]:
+def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[int, int]]:
     for row_index, row in enumerate(grid):
         for col_index, value in enumerate(row):
             if value == ".":
@@ -69,14 +57,8 @@ def find_empty_positions(
     return None
 
 
-def find_possible_values(
-    grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]
-) -> tp.Set[str]:
-    used = (
-        set(get_row(grid, pos))
-        | set(get_col(grid, pos))
-        | set(get_block(grid, pos))
-    )
+def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.Set[str]:
+    used = set(get_row(grid, pos)) | set(get_col(grid, pos)) | set(get_block(grid, pos))
     return {str(i) for i in range(1, 10)} - used
 
 
@@ -107,11 +89,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
 
     for r in range(0, 9, 3):
         for c in range(0, 9, 3):
-            block = [
-                solution[i][j]
-                for i in range(r, r + 3)
-                for j in range(c, c + 3)
-            ]
+            block = [solution[i][j] for i in range(r, r + 3) for j in range(c, c + 3)]
             if set(block) != digits:
                 return False
 
