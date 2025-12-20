@@ -1,3 +1,6 @@
+eng_alphabet_length = 26
+
+
 def shift_char(char, key, decrypt=False):
     if not char.isalpha():
         return char
@@ -6,9 +9,9 @@ def shift_char(char, key, decrypt=False):
     char_val = ord(char) - char_base
     key_val = ord(key) - key_base
     if decrypt:
-        shifted = (char_val - key_val) % 26
+        shifted = (char_val - key_val) % eng_alphabet_length
     else:
-        shifted = (char_val + key_val) % 26
+        shifted = (char_val + key_val) % eng_alphabet_length
     return chr(char_base + shifted)
 
 
