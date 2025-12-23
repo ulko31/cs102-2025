@@ -14,9 +14,7 @@ def create_grid(rows: int = 15, cols: int = 15) -> List[List[Cell]]:
     return [["■"] * cols for _ in range(rows)]
 
 
-def remove_wall(
-    grid: List[List[Cell]], coord: Tuple[int, int]
-) -> List[List[Cell]]:
+def remove_wall(grid: List[List[Cell]], coord: Tuple[int, int]) -> List[List[Cell]]:
     x, y = coord
     rows, cols = len(grid), len(grid[0])
 
@@ -36,9 +34,7 @@ def remove_wall(
     return grid
 
 
-def bin_tree_maze(
-    rows: int = 15, cols: int = 15, random_exit: bool = True
-) -> List[List[Cell]]:
+def bin_tree_maze(rows: int = 15, cols: int = 15, random_exit: bool = True) -> List[List[Cell]]:
     global _call_counter_5x5
 
     if rows == 5 and cols == 5:
