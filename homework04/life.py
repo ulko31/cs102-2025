@@ -11,7 +11,8 @@ class GameOfLife:
     def __init__(
         self,
         size: tp.Tuple[int, int],
-        randomize: bool = True, max_generations: tp.Optional[float] = float("inf"),
+        randomize: bool = True,
+        max_generations: tp.Optional[float] = float("inf"),
     ) -> None:
         self.rows, self.cols = size
         self.prev_generation = self.create_grid()
