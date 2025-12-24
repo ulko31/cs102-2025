@@ -72,6 +72,8 @@ class GameOfLife:
     @property
     def is_max_generations_exceeded(self) -> bool:
         """Не превысило ли текущее число поколений максимально допустимое."""
+        if self.max_generations is None:
+            return False
         return self.generations >= self.max_generations
 
     @property
