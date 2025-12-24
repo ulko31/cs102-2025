@@ -8,12 +8,7 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
-    def __init__(
-        self,
-        size: tp.Tuple[int, int],
-        randomize: bool = True,
-        max_generations: tp.Optional[float] = float("inf"),
-    ) -> None:
+    def __init__(self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10) -> None:
         self.rows, self.cols = size
         self.prev_generation = self.create_grid()
         self.curr_generation = self.create_grid(randomize=randomize)
@@ -48,9 +43,7 @@ class GameOfLife:
 
     def get_next_generation(self) -> Grid:
         """Получить следующее поколение клеток."""
-        new_grid: Grid = [
-            [0 for _ in range(self.cols)] for _ in range(self.rows)
-        ]
+        new_grid: Grid = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
         for r in range(self.rows):
             for c in range(self.cols):
                 alive = self.curr_generation[r][c] == 1

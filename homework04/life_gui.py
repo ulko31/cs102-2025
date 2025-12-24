@@ -10,7 +10,6 @@ class GUI(UI):
         self.cell_size = cell_size
         self.speed = speed
 
-        # размеры окна по размеру поля
         self.width = self.life.cols * self.cell_size
         self.height = self.life.rows * self.cell_size
         self.screen_size = (self.width, self.height)
@@ -30,9 +29,7 @@ class GUI(UI):
         """Отрисовать клетки текущего поколения."""
         for r in range(self.life.rows):
             for c in range(self.life.cols):
-                color = pygame.Color("green") if self.life.curr_generation[r][c] == 1 else pygame.Color(
-                    "white"
-                )
+                color = pygame.Color("green") if self.life.curr_generation[r][c] == 1 else pygame.Color("white")
                 rect = pygame.Rect(
                     c * self.cell_size,
                     r * self.cell_size,
@@ -45,18 +42,16 @@ class GUI(UI):
         """Основной игровой цикл."""
         clock = pygame.time.Clock()
         running = True
-        paused = False  # доп. задание: пауза
+        paused = False
 
         while running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
                 elif event.type == KEYDOWN:
-                    # пробел — пауза/продолжение
                     if event.key == K_SPACE:
                         paused = not paused
                 elif event.type == MOUSEBUTTONDOWN and paused:
-                    # при паузе кликом меняем состояние клетки
                     x, y = pygame.mouse.get_pos()
                     col = x // self.cell_size
                     row = y // self.cell_size
@@ -73,6 +68,7 @@ class GUI(UI):
             clock.tick(self.speed)
 
         pygame.quit()
+
 
 if __name__ == "__main__":
     import random

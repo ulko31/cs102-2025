@@ -34,12 +34,11 @@ class Console(UI):
         screen = curses.initscr()
         curses.noecho()
         curses.cbreak()
-        screen.nodelay(True)  # не блокировать getch
+        screen.nodelay(True)
 
         try:
             while self.life.is_changing and not self.life.is_max_generations_exceeded:
                 ch = screen.getch()
-                # доп. задание: выход по 'q'
                 if ch == ord("q"):
                     break
 
@@ -55,8 +54,10 @@ class Console(UI):
             curses.echo()
             curses.endwin()
 
+
 if __name__ == "__main__":
     import random
+
     random.seed(4321)
     life = GameOfLife((20, 60), randomize=True, max_generations=50)
     ui = Console(life)
