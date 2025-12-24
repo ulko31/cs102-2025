@@ -10,9 +10,7 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
-    def __init__(
-        self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10
-    ) -> None:
+    def __init__(self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10) -> None:
         self.width = width
         self.height = height
         self.cell_size = cell_size
@@ -103,9 +101,7 @@ class GameOfLife:
         return neighbours
 
     def get_next_generation(self) -> Grid:
-        new_grid: Grid = [
-            [0 for _ in range(self.cell_width)] for _ in range(self.cell_height)
-        ]
+        new_grid: Grid = [[0 for _ in range(self.cell_width)] for _ in range(self.cell_height)]
 
         for r in range(self.cell_height):
             for c in range(self.cell_width):
