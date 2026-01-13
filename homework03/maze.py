@@ -98,7 +98,7 @@ def shortest_path(grid, exit_coord):
 
     while value > 1:
         moved = False
-        for dx, dy in ((1,0),(-1,0),(0,1),(0,-1)):
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             nx, ny = x + dx, y + dy
             if 0 <= nx < rows and 0 <= ny < cols:
                 neighbour = grid[nx][ny]
