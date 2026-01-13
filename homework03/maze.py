@@ -83,25 +83,35 @@ def encircled_exit(grid: List[List[Cell]], pos: Tuple[int, int]) -> bool:
     return True
 
 
-def shortest_path(grid: List[List[Cell]], end: Tuple[int, int]) -> Optional[List[Tuple[int, int]]]:
-    x, y = end
-    if not isinstance(grid[x][y], int) or not grid[x][y]:
+def shortest_path(grid, exit_coord):
+    rows = len(grid)
+    cols = len(grid[0])
+
+    x, y = exit_coord
+    cell = grid[x][y]
+
+    if not isinstance(cell, int) or cell <= 1:
         return None
 
-    dist = grid[x][y]
+    value = cell
     path = [(x, y)]
-    h, w = len(grid), len(grid[0])
 
-    while dist > 1:
-        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-            nx, ny = x + dr, y + dc
-            if 0 <= nx < h and 0 <= ny < w and grid[nx][ny] == dist - 1:
-                path.append((nx, ny))
-                x, y = nx, ny
-                dist -= 1
-                break
-        else:
+    while value > 1:
+        moved = False
+        for dx, dy in ((1,0),(-1,0),(0,1),(0,-1)):
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < rows and 0 <= ny < cols:
+                neighbour = grid[nx][ny]
+                if isinstance(neighbour, int) and neighbour == value - 1:
+                    path.append((nx, ny))
+                    x, y = nx, ny
+                    value -= 1
+                    moved = True
+                    break
+
+        if not moved:
             return None
+
     return path
 
 
