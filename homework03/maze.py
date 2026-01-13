@@ -13,7 +13,7 @@ def remove_wall(grid: List[List[Cell]], pos: Tuple[int, int]) -> List[List[Cell]
     r, c = pos
     max_r, max_c = len(grid), len(grid[0])
 
-    dr, dc = ((-2, 0) if choice((True, False)) else (0, 2))
+    dr, dc = (-2, 0) if choice((True, False)) else (0, 2)
     nr, nc = r + dr, c + dc
 
     if not (0 <= nr < max_r and 0 <= nc < max_c):
@@ -76,7 +76,7 @@ def encircled_exit(grid: List[List[Cell]], pos: Tuple[int, int]) -> bool:
     if r not in (0, h - 1) and c not in (0, w - 1):
         return False
 
-    for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
+    for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
         nr, nc = r + dr, c + dc
         if 0 <= nr < h and 0 <= nc < w and grid[nr][nc] != "■":
             return False
@@ -93,7 +93,7 @@ def shortest_path(grid: List[List[Cell]], end: Tuple[int, int]) -> Optional[List
     h, w = len(grid), len(grid[0])
 
     while dist > 1:
-        for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             nx, ny = x + dr, y + dc
             if 0 <= nx < h and 0 <= ny < w and grid[nx][ny] == dist - 1:
                 path.append((nx, ny))
