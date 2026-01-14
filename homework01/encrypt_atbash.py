@@ -9,6 +9,7 @@ def encrypt_atbash(plaintext: str) -> str:
             result.append(ch)
     return "".join(result)
 
+
 if __name__ == "__main__":
     print(encrypt_atbash("Hello, World!"))
     print(encrypt_atbash("abcXYZ"))
